@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEME 42 | Expert Cybersécurité & Auditeur - systeme42.com</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fira Code & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#0a0d14',
+                            card: '#111625',
+                            border: '#1f293d',
+                            accent: '#00f0ff',  /* Electric Cyan */
+                            neon: '#00ff66',    /* Hacker Green */
+                            purple: '#7000ff',  /* Deep Cyber Purple */
+                            alert: '#ff0055'    /* Cyber Red */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Glowing, Grid & Watermark Background */
+        body {
+            background-color: #0a0d14;
+            color: #e2e8f0;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.05) 0%, transparent 35%),
+                radial-gradient(circle at 85% 85%, rgba(112, 0, 255, 0.05) 0%, transparent 35%);
+        }
+
+        /* Arrière-plan avec texte SYSTEME 42 */
+        body::before {
+            content: "SYSTEME 42";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-family: 'Fira Code', monospace;
+            font-size: 15vw;
+            font-weight: 800;
+            color: rgba(0, 240, 255, 0.015);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+        }
+
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        .glow-accent {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+            border-color: #00f0ff;
+        }
+
+        /* Terminal Blink Cursor */
+        .cursor-blink::after {
+            content: '█';
+            animation: blink 1s infinite;
+            color: #00ff66;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Pulse WhatsApp Button */
+        .pulse-whatsapp {
+            animation: whatsapp-glow 2s infinite;
+        }
+
+        @keyframes whatsapp-glow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased cyber-grid min-h-screen flex flex-col justify-between selection:bg-cyber-accent selection:text-black">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-cyber-bg/90 backdrop-blur-md border-b border-cyber-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="https://systeme42.com" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-cyber-card border border-cyber-accent flex items-center justify-center text-cyber-accent font-mono font-bold text-lg group-hover:bg-cyber-accent group-hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                    S42
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-mono text-lg font-bold text-white tracking-wider">
+                        SYSTEME <span class="text-cyber-accent">42</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-gray-400">systeme42.com</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-gray-300 hover:text-cyber-accent transition-colors">&gt; À propos</a>
+                <a href="#services" class="text-gray-300 hover:text-cyber-accent transition-colors">&gt; Services</a>
+                <a href="#skills" class="text-gray-300 hover:text-cyber-accent transition-colors">&gt; Compétences</a>
+                <a href="#projects" class="text-gray-300 hover:text-cyber-accent transition-colors">&gt; Projets & Labs</a>
+                <a href="#contact" class="text-gray-300 hover:text-cyber-accent transition-colors">&gt; Contact</a>
+            </nav>
+
+            <!-- Call to Action CTA -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/237694405887?text=Bonjour%20SYSTEME%2042,%20je%20souhaite%20obtenir%20des%20informations%20sur%20vos%20services%20de%20cybersécurité." target="_blank" class="px-4 py-2.5 rounded-lg bg-green-500/20 border border-green-500 text-green-400 font-mono text-xs font-semibold uppercase tracking-wider hover:bg-green-500 hover:text-black transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-border px-6 py-6 space-y-4 font-mono text-sm">
+            <a href="#about" class="block text-gray-300 hover:text-cyber-accent transition-colors">&gt; À propos</a>
+            <a href="#services" class="block text-gray-300 hover:text-cyber-accent transition-colors">&gt; Services</a>
+            <a href="#skills" class="block text-gray-300 hover:text-cyber-accent transition-colors">&gt; Compétences</a>
+            <a href="#projects" class="block text-gray-300 hover:text-cyber-accent transition-colors">&gt; Projets & Labs</a>
+            <a href="#contact" class="block text-gray-300 hover:text-cyber-accent transition-colors">&gt; Contact</a>
+            <a href="https://wa.me/237694405887?text=Bonjour%20SYSTEME%2042,%20je%20souhaite%20demander%20un%20audit." target="_blank" class="inline-block w-full text-center px-4 py-2.5 rounded-lg bg-green-500 text-black font-semibold uppercase text-xs">
+                <i class="fa-brands fa-whatsapp mr-1"></i> Discuter sur WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Content -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyber-card border border-cyber-border text-xs font-mono text-cyber-neon">
+                        <span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span>
+                        Douala, Cameroun — Disponible pour Audits & Sécurité IT
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        SYSTEME 42 : Sécurisez Vos <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-accent via-blue-400 to-cyber-neon">Infrastructures Informatiques</span>
+                    </h1>
+
+                    <p class="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        Basé à Douala, Cameroun, <strong class="text-white">SYSTEME 42</strong> est votre partenaire de confiance en cybersécurité. Nous protégeons les entreprises, banques et PME contre les cyberattaques, les fuites de données et les fuites financières.
+                    </p>
+
+                    <!-- CTAs & Social Links -->
+                    <div class="pt-2 flex flex-wrap gap-4 items-center">
+                        <a href="https://wa.me/237694405887?text=Bonjour%20SYSTEME%2042,%20je%20souhaite%20commander%20un%20audit%20de%20sécurité." target="_blank" class="px-6 py-3.5 rounded-xl bg-cyber-accent text-black font-semibold text-sm flex items-center gap-2 hover:bg-cyan-300 transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                            <i class="fa-solid fa-shield-halved"></i> Demander un Audit
+                        </a>
+                        <a href="https://wa.me/237694405887?text=Bonjour%20SYSTEME%2042,%20je%20souhaite%20discuter%20directement." target="_blank" class="px-6 py-3.5 rounded-xl bg-green-600 text-white font-semibold text-sm hover:bg-green-500 transition-all duration-300 flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Discuter sur WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="pt-6 border-t border-cyber-border/60 flex items-center gap-6 text-gray-400 text-xl">
+                        <span class="text-xs font-mono uppercase text-gray-500">Contact direct :</span>
+                        <a href="tel:+237694405887" class="text-sm font-mono text-cyber-accent hover:underline"><i class="fa-solid fa-phone mr-1"></i> +237 694 40 58 87</a>
+                        <span class="text-xs text-gray-600">|</span>
+                        <a href="https://systeme42.com" class="text-sm font-mono text-gray-300 hover:text-cyber-accent"><i class="fa-solid fa-globe mr-1"></i> systeme42.com</a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Terminal Preview -->
+                <div class="lg:col-span-5">
+                    <div class="rounded-2xl bg-cyber-card border border-cyber-border overflow-hidden shadow-2xl">
+                        <!-- Terminal Top Bar -->
+                        <div class="px-4 py-3 bg-gray-900 border-b border-cyber-border flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                            </div>
+                            <span class="text-xs font-mono text-gray-400"><i class="fa-solid fa-terminal mr-1"></i> admin@systeme42.com:~</span>
+                        </div>
+                        <!-- Terminal Body -->
+                        <div class="p-5 font-mono text-xs sm:text-sm space-y-3 min-h-[300px] bg-black/80">
+                            <div>
+                                <span class="text-cyber-neon">root@systeme42:~$</span> <span class="text-white">whoami</span>
+                            </div>
+                            <p class="text-gray-400">
+                                &gt; Agency: SYSTEME 42<br>
+                                &gt; Domain: systeme42.com<br>
+                                &gt; Location: Douala, Cameroun 🇨🇲<br>
+                                &gt; Phone: +237 694 40 58 87<br>
+                                &gt; Services: Pentest, SOC, Hardening, Compliance ANTIC
+                            </p>
+                            
+                            <div>
+                                <span class="text-cyber-neon">root@systeme42:~$</span> <span class="text-white">systeme42 --status</span>
+                            </div>
+                            <div class="text-gray-400 space-y-1">
+                                <p class="text-green-400">[+] SYSTEM STATUS: ONLINE & SECURE</p>
+                                <p>[+] Firewall & IDS: Active</p>
+                                <p>[+] Phishing Protection: Enabled</p>
+                                <p class="text-cyber-neon">[+] Ready for Security Audit in Cameroon</p>
+                            </div>
+
+                            <div class="pt-2">
+                                <span class="text-cyber-neon">root@systeme42:~$</span> <span class="text-white cursor-blink">start_audit --target</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS & KEY HIGHLIGHTS -->
+    <section class="border-y border-cyber-border bg-cyber-card/40 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4 border-r border-cyber-border/50 last:border-0">
+                    <p class="text-3xl sm:text-4xl font-extrabold font-mono text-cyber-accent">SYSTEME 42</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Marque & Expertise IT</p>
+                </div>
+                <div class="p-4 border-r border-cyber-border/50 last:border-0">
+                    <p class="text-3xl sm:text-4xl font-extrabold font-mono text-cyber-neon">100%</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Conformité ANTIC & ISO</p>
+                </div>
+                <div class="p-4 border-r border-cyber-border/50 last:border-0">
+                    <p class="text-3xl sm:text-4xl font-extrabold font-mono text-cyber-accent">Douala</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Siège principal (Cameroun)</p>
+                </div>
+                <div class="p-4">
+                    <p class="text-3xl sm:text-4xl font-extrabold font-mono text-purple-400">24/7</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Assistance & Support WhatsApp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase text-cyber-accent tracking-widest">&gt; À Propos de SYSTEME 42</h2>
+                <p class="text-3xl font-bold text-white mt-2">Expertise en Cybersécurité au Cameroun</p>
+                <div class="w-16 h-1 bg-cyber-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-gray-300 leading-relaxed">
+                    <p>
+                        <strong class="text-cyber-accent">SYSTEME 42</strong> (systeme42.com) est un cabinet et service spécialisé en cybersécurité basé à Douala, Cameroun. Nous accompagnons les petites, moyennes et grandes entreprises dans l'évaluation et la protection de leurs réseaux et données sensibles.
+                    </p>
+                    <p>
+                        Face à l'augmentation des arnaques par Mobile Money, du phishing par e-mail et des ransomwares au Cameroun, SYSTEME 42 propose des solutions préventives et curatives adaptées au marché local.
+                    </p>
+                    <div class="pt-4 grid grid-cols-2 gap-4 font-mono text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyber-neon"></i> Pentest Applications & Web
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyber-neon"></i> Audit de Sécurité Réseau
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyber-neon"></i> Protection Anti-Phishing
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyber-neon"></i> Conformité ANTIC
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Highlights Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border glow-hover transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-cyber-accent/10 text-cyber-accent flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Audits Intrusifs</h3>
+                        <p class="text-xs text-gray-400">Tests de pénétration pour détecter vos failles avant les cybercriminels.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border glow-hover transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-cyber-neon/10 text-cyber-neon flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Défense & Hardening</h3>
+                        <p class="text-xs text-gray-400">Configuration pare-feu, VPN sécurisés et verrouillage des serveurs Linux/Windows.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border glow-hover transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Formation d'Équipe</h3>
+                        <p class="text-xs text-gray-400">Sensibilisation du personnel contre l'ingénierie sociale et les fuites de données.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border glow-hover transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Support Direct</h3>
+                        <p class="text-xs text-gray-400">Assistance rapide par téléphone et WhatsApp au +237 694 40 58 87.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES OFFERED -->
+    <section id="services" class="py-20 bg-cyber-card/30 border-y border-cyber-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase text-cyber-accent tracking-widest">&gt; Nos Prestations</h2>
+                <p class="text-3xl font-bold text-white mt-2">Services de Cybersécurité SYSTEME 42</p>
+                <div class="w-16 h-1 bg-cyber-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-2xl bg-cyber-card border border-cyber-border flex flex-col justify-between glow-hover transition-all duration-300">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-cyber-accent/10 border border-cyber-accent/30 text-cyber-accent flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-bug"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Audit & Pentest Web/Réseau</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Analyse complète de la sécurité de votre site internet, vos serveurs et vos applications métiers pour repérer toute faille d'intrusion.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-300 space-y-2 font-mono border-t border-cyber-border pt-4">
+                        <li><i class="fa-solid fa-chevron-right text-cyber-accent mr-2"></i>Test de vulnérabilités OWASP</li>
+                        <li><i class="fa-solid fa-chevron-right text-cyber-accent mr-2"></i>Rapport exécutif avec plans de correctifs</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 rounded-2xl bg-cyber-card border border-cyber-border flex flex-col justify-between glow-hover transition-all duration-300">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-cyber-neon/10 border border-cyber-neon/30 text-cyber-neon flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Sécurisation Réseau & Hardening</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Installation de pare-feu, segmentation réseau, déploiement d'outils de détection (IDS/IPS) et sécurisation des accès distants (VPN).
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-300 space-y-2 font-mono border-t border-cyber-border pt-4">
+                        <li><i class="fa-solid fa-chevron-right text-cyber-neon mr-2"></i>Protection Anti-Ransomware</li>
+                        <li><i class="fa-solid fa-chevron-right text-cyber-neon mr-2"></i>Configuration Routers & Firewall</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="p-8 rounded-2xl bg-cyber-card border border-cyber-border flex flex-col justify-between glow-hover transition-all duration-300">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Sensibilisation & Anti-Arnaques</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Formations pratiques de vos employés contre le piratage par e-mail, faux ordres de virement et pièges Mobile Money au Cameroun.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-300 space-y-2 font-mono border-t border-cyber-border pt-4">
+                        <li><i class="fa-solid fa-chevron-right text-purple-400 mr-2"></i>Campagnes de phishing test</li>
+                        <li><i class="fa-solid fa-chevron-right text-purple-400 mr-2"></i>Ateliers interactifs pour équipes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase text-cyber-accent tracking-widest">&gt; Technologies</h2>
+                <p class="text-3xl font-bold text-white mt-2">Outils & Compétences Techniques</p>
+                <div class="w-16 h-1 bg-cyber-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pentest & Scanners -->
+                <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border">
+                    <h3 class="text-sm font-mono text-cyber-accent uppercase tracking-wider mb-4 border-b border-cyber-border pb-2">
+                        <i class="fa-solid fa-terminal mr-2"></i> Pentesting
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Burp Suite</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Nmap</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Metasploit</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">OWASP ZAP</span>
+                    </div>
+                </div>
+
+                <!-- Defense & Monitoring -->
+                <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border">
+                    <h3 class="text-sm font-mono text-cyber-neon uppercase tracking-wider mb-4 border-b border-cyber-border pb-2">
+                        <i class="fa-solid fa-shield-cat mr-2"></i> Défense & SIEM
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Wazuh SIEM</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">pfSense</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Snort IDS</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Firewalling</span>
+                    </div>
+                </div>
+
+                <!-- Systems & Networks -->
+                <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border">
+                    <h3 class="text-sm font-mono text-purple-400 uppercase tracking-wider mb-4 border-b border-cyber-border pb-2">
+                        <i class="fa-solid fa-server mr-2"></i> Systèmes & Réseaux
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Kali Linux</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Ubuntu Server</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Active Directory</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Cisco CCNA</span>
+                    </div>
+                </div>
+
+                <!-- Scripting & Code -->
+                <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border">
+                    <h3 class="text-sm font-mono text-yellow-400 uppercase tracking-wider mb-4 border-b border-cyber-border pb-2">
+                        <i class="fa-solid fa-code mr-2"></i> Scripting
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Python</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">Bash</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">PowerShell</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-black/60 border border-cyber-border text-xs text-gray-300 font-mono">HTML/JS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-cyber-card/30 border-t border-cyber-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase text-cyber-accent tracking-widest">&gt; Contactez SYSTEME 42</h2>
+                <p class="text-3xl font-bold text-white mt-2">Démarrons Votre Prochain Audit</p>
+                <div class="w-16 h-1 bg-cyber-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Info Side -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="p-6 rounded-2xl bg-cyber-card border border-cyber-border space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyber-accent/10 border border-cyber-accent/30 text-cyber-accent flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Localisation</h4>
+                                <p class="text-sm text-gray-400 mt-1">Douala, Cameroun</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">WhatsApp Direct</h4>
+                                <a href="https://wa.me/237694405887" target="_blank" class="text-sm text-green-400 hover:underline mt-1 inline-block font-mono">+237 694 40 58 87</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Site Web Officiel</h4>
+                                <p class="text-sm text-gray-400 mt-1 font-mono">systeme42.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct WhatsApp CTA Box -->
+                    <div class="p-6 rounded-2xl bg-gradient-to-r from-green-900/30 to-cyber-card border border-green-500/40 text-center">
+                        <h4 class="text-lg font-bold text-white mb-2">Besoin d'une réponse immédiate ?</h4>
+                        <p class="text-xs text-gray-300 mb-4">Contactez directement notre équipe sur WhatsApp au 694405887.</p>
+                        <a href="https://wa.me/237694405887?text=Bonjour%20SYSTEME%2042,%20je%20souhaite%20une%20assistance." target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-green-500 text-black font-bold text-xs uppercase tracking-wider hover:bg-green-400 transition-all">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Ouvrir WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="lg:col-span-7">
+                    <form class="p-8 rounded-2xl bg-cyber-card border border-cyber-border space-y-6" onsubmit="event.preventDefault(); alert('Merci ! SYSTEME 42 a bien reçu votre message.');">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-mono uppercase text-gray-400 mb-2">Nom Complet</label>
+                                <input type="text" required placeholder="Ex: Paul Biya" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-cyber-border text-white text-sm focus:outline-none focus:border-cyber-accent">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono uppercase text-gray-400 mb-2">Téléphone / WhatsApp</label>
+                                <input type="tel" required placeholder="+237 6XX XX XX XX" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-cyber-border text-white text-sm focus:outline-none focus:border-cyber-accent">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono uppercase text-gray-400 mb-2">Service Souhaité</label>
+                            <select class="w-full px-4 py-3 rounded-xl bg-black/60 border border-cyber-border text-white text-sm focus:outline-none focus:border-cyber-accent">
+                                <option>Audit & Pentest de site Web / Application</option>
+                                <option>Sécurisation Réseau & Pare-feu</option>
+                                <option>Sensibilisation du Personnel Anti-Phishing</option>
+                                <option>Accompagnement Norme ANTIC / ISO</option>
+                                <option>Autre demande</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono uppercase text-gray-400 mb-2">Message</label>
+                            <textarea rows="4" required placeholder="Décrivez brièvement vos besoins en sécurité..." class="w-full px-4 py-3 rounded-xl bg-black/60 border border-cyber-border text-white text-sm focus:outline-none focus:border-cyber-accent"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-cyber-accent text-black font-bold text-sm uppercase tracking-wider hover:bg-cyan-300 transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+                            Envoyer la demande à SYSTEME 42
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-cyber-border bg-black/80 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-gray-500">
+            <div>
+                &copy; 2026 <span class="text-white font-bold">SYSTEME 42</span> (systeme42.com) — Douala, Cameroun. Tous droits réservés.
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="tel:+237694405887" class="hover:text-cyber-accent"><i class="fa-solid fa-phone"></i> +237 694 40 58 87</a>
+                <a href="https://wa.me/237694405887" target="_blank" class="hover:text-green-400"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOUTON FLOTTANT WHATSAPP (Bas Droite) -->
+    <a href="https://wa.me/237694405887?text=Bonjour%20SYSTEME%2042,%20je%20souhaite%20des%20informations." target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl pulse-whatsapp hover:scale-110 transition-transform duration-300" title="Discuter sur WhatsApp avec SYSTEME 42">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPT MENU MOBILE -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
